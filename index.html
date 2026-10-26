@@ -1,0 +1,548 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Retail24 · Your local convenience store, East Finchley N2</title>
+<meta name="description" content="Retail24 (formerly N2 Food Centre) at 46 High Road, East Finchley N2. Fresh fruit & veg, groceries, cold drinks and a well-stocked off licence, open early till late.">
+<meta name="theme-color" content="#0a0f24">
+<link rel="icon" href="assets/logo-mark.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@500;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --night:#070b1c;
+  --navy:#0a0f24;
+  --navy-2:#111a3d;
+  --awning:#1b2a6b;
+  --led:#f4f6ff;
+  --muted:#a9b2d9;
+  --gold:#f5c443;
+  --gold-2:#f0a92b;
+  --heart:#ff3b4e;
+  --leaf:#3ccf6e;
+  --cream:#fbf7ee;
+  --ink:#0d1330;
+  --line:rgba(255,255,255,.09);
+  --radius:22px;
+  --wrap:1200px;
+  --display:"Unbounded","Arial Black",system-ui,sans-serif;
+  --body:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --script:"Caveat",cursive;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--night);color:var(--led);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 24px}
+.gold{background:linear-gradient(120deg,#ffe08a,var(--gold) 40%,var(--gold-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.script{font-family:var(--script);font-weight:700;color:var(--gold);letter-spacing:0}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:12px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+.eyebrow::before{content:"";width:28px;height:2px;background:currentColor;border-radius:2px}
+h1,h2,h3{font-family:var(--display);line-height:1.02;letter-spacing:-.02em}
+h2{font-size:clamp(34px,5vw,60px);font-weight:800}
+
+/* ---------- buttons ---------- */
+.btn{display:inline-flex;align-items:center;gap:10px;padding:16px 26px;border-radius:999px;font-weight:800;font-size:15px;letter-spacing:.01em;transition:transform .25s,box-shadow .25s,background .25s}
+.btn svg{width:18px;height:18px}
+.btn-gold{background:linear-gradient(135deg,#ffe08a,var(--gold) 45%,var(--gold-2));color:var(--ink);box-shadow:0 10px 30px -8px rgba(245,196,67,.6)}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 18px 40px -10px rgba(245,196,67,.75)}
+.btn-ghost{border:1.5px solid rgba(255,255,255,.22);color:var(--led)}
+.btn-ghost:hover{background:rgba(255,255,255,.07);transform:translateY(-2px)}
+
+/* ---------- nav ---------- */
+.nav{position:fixed;inset:0 0 auto;z-index:50;transition:background .3s,backdrop-filter .3s,border-color .3s;border-bottom:1px solid transparent}
+.nav.scrolled{background:rgba(7,11,28,.78);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-color:var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:78px;gap:20px}
+.brand{display:flex;align-items:center;gap:12px}
+.brand svg.mark{width:46px;height:46px;flex:none;filter:drop-shadow(0 6px 18px rgba(255,59,78,.25))}
+.brand .word{font-family:var(--display);font-weight:800;font-size:22px;letter-spacing:-.02em;line-height:1}
+.brand .tag{display:block;font-size:9.5px;font-weight:700;letter-spacing:.2em;color:var(--muted);margin-top:5px;text-transform:uppercase}
+.brand .tag i{font-family:var(--script);font-style:normal;font-size:16px;color:var(--gold);letter-spacing:0;text-transform:none;line-height:0}
+.nav-links{display:flex;gap:30px;font-weight:700;font-size:14.5px;color:var(--muted)}
+.nav-links a:hover{color:var(--led)}
+.status{display:inline-flex;align-items:center;gap:9px;padding:9px 16px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid var(--line);font-size:13px;font-weight:800;white-space:nowrap}
+.status .dot{width:9px;height:9px;border-radius:50%;background:var(--muted)}
+.status.open .dot{background:var(--leaf);box-shadow:0 0 0 0 rgba(60,207,110,.7);animation:ping 2s infinite}
+.status.closed .dot{background:var(--heart)}
+@keyframes ping{0%{box-shadow:0 0 0 0 rgba(60,207,110,.6)}80%,100%{box-shadow:0 0 0 10px rgba(60,207,110,0)}}
+
+/* ---------- hero ---------- */
+.hero{position:relative;min-height:min(100vh,980px);min-height:min(100svh,980px);display:flex;align-items:center;padding:130px 0 90px;isolation:isolate;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;z-index:-2;
+  background:
+    radial-gradient(60% 50% at 78% 30%,rgba(43,64,170,.55),transparent 70%),
+    radial-gradient(40% 40% at 10% 85%,rgba(255,59,78,.18),transparent 70%),
+    radial-gradient(50% 40% at 60% 100%,rgba(245,196,67,.14),transparent 70%),
+    linear-gradient(180deg,#070b1c 0%,#0b1230 60%,#070b1c 100%)}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;opacity:.35;
+  background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);
+  background-size:56px 56px;mask-image:radial-gradient(70% 60% at 50% 40%,#000 30%,transparent 80%);-webkit-mask-image:radial-gradient(70% 60% at 50% 40%,#000 30%,transparent 80%)}
+.hero .wrap>*{min-width:0}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:60px;align-items:center;width:100%}
+.hero h1{font-size:clamp(46px,7.4vw,104px);font-weight:900;margin:22px 0 26px}
+.hero h1 .neon{color:#fff;text-shadow:0 0 6px rgba(255,255,255,.55),0 0 22px rgba(120,150,255,.65),0 0 60px rgba(70,100,255,.55)}
+.hero h1 .script{display:inline-block;font-size:.78em;transform:rotate(-6deg) translateY(-.04em);margin:0 .06em;text-shadow:0 0 30px rgba(245,196,67,.45)}
+.hero p.lede{font-size:clamp(17px,1.6vw,20px);color:var(--muted);max-width:540px}
+.hero p.lede strong{color:var(--led)}
+.hero .ctas{display:flex;flex-wrap:wrap;gap:14px;margin-top:36px}
+.hero .facts{display:flex;flex-wrap:wrap;gap:28px;margin-top:48px;padding-top:28px;border-top:1px solid var(--line)}
+.hero .facts div{font-size:13px;color:var(--muted);font-weight:600}
+.hero .facts b{display:block;font-family:var(--display);font-size:22px;color:var(--led);font-weight:700;margin-bottom:2px}
+
+.stage{position:relative;aspect-ratio:4/5;max-width:470px;justify-self:end;width:100%}
+.stage .photo{position:absolute;inset:0;border-radius:28px;overflow:hidden;transform:rotate(2.5deg);box-shadow:0 40px 80px -20px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.08),0 0 90px -10px rgba(70,100,255,.45)}
+.stage .photo img{width:100%;height:100%;object-fit:cover;object-position:50% 40%;transform:scale(1.04);transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
+.stage:hover .photo img{transform:scale(1.09)}
+.stage .photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(7,11,28,.75))}
+.sticker{position:absolute;z-index:2;border-radius:18px;padding:14px 18px;font-weight:800;box-shadow:0 20px 40px -12px rgba(0,0,0,.6)}
+.sticker.s1{left:-34px;top:13%;background:var(--cream);color:var(--ink);transform:rotate(-7deg);display:flex;align-items:center;gap:12px;animation:bob 6s ease-in-out infinite}
+.sticker.s1 .em{font-size:30px;line-height:1}
+.sticker.s1 small{display:block;font-size:11px;font-weight:700;color:#5b6283;letter-spacing:.06em;text-transform:uppercase}
+.sticker.s2{right:-22px;bottom:16%;background:linear-gradient(135deg,#ffe08a,var(--gold-2));color:var(--ink);transform:rotate(6deg);text-align:center;width:118px;height:118px;border-radius:50%;display:grid;place-content:center;font-family:var(--display);line-height:1;animation:bob 7s ease-in-out -2s infinite}
+.sticker.s2 b{font-size:38px;font-weight:900}
+.sticker.s2 span{font-size:10px;letter-spacing:.14em;margin-top:4px}
+.sticker.s3{left:22px;bottom:22px;background:rgba(7,11,28,.7);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.14);font-size:13px;display:flex;align-items:center;gap:10px;transform:rotate(2.5deg)}
+.sticker.s3 svg{width:18px;height:18px;color:var(--heart)}
+@keyframes bob{0%,100%{translate:0 0}50%{translate:0 -10px}}
+
+/* ---------- marquee ---------- */
+.ticker{background:linear-gradient(90deg,var(--awning),#22348a,var(--awning));border-block:1px solid rgba(255,255,255,.12);overflow:hidden;position:relative}
+.ticker .track{display:flex;width:max-content;animation:scroll 38s linear infinite}
+.ticker ul{display:flex;list-style:none;align-items:center}
+.ticker li{font-family:var(--display);font-weight:700;font-size:clamp(16px,2vw,22px);letter-spacing:.06em;padding:20px 0;white-space:nowrap;display:flex;align-items:center;text-transform:uppercase}
+.ticker li::after{content:"";width:9px;height:9px;margin:0 30px;border-radius:50%;background:var(--gold);box-shadow:0 0 14px var(--gold)}
+.ticker li:nth-child(3n+2)::after{background:var(--heart);box-shadow:0 0 14px var(--heart)}
+.ticker li:nth-child(3n)::after{background:var(--leaf);box-shadow:0 0 14px var(--leaf)}
+@keyframes scroll{to{transform:translateX(-50%)}}
+
+/* ---------- sections ---------- */
+section{position:relative}
+.section{padding:clamp(80px,11vw,140px) 0}
+.head{display:flex;justify-content:space-between;align-items:end;gap:40px;margin-bottom:56px;flex-wrap:wrap}
+.head h2{margin-top:16px;max-width:720px}
+.head p{color:var(--muted);max-width:400px}
+
+/* aisles */
+.aisles{display:grid;grid-template-columns:repeat(6,1fr);gap:20px}
+.card{position:relative;border-radius:var(--radius);overflow:hidden;background:var(--navy-2);border:1px solid var(--line);min-height:250px;padding:30px;display:flex;flex-direction:column;justify-content:flex-end;isolation:isolate;transition:transform .45s cubic-bezier(.2,.7,.2,1),border-color .3s}
+.card:hover{transform:translateY(-6px);border-color:rgba(255,255,255,.2)}
+.card h3{font-size:clamp(22px,2.4vw,30px);font-weight:800;margin-bottom:10px}
+.card p{color:var(--muted);font-size:15.5px;max-width:380px}
+.card .tagline{position:absolute;top:26px;left:30px;font-size:12px;font-weight:800;letter-spacing:.18em;text-transform:uppercase}
+.card .bgimg{position:absolute;inset:0;z-index:-1}
+.card .bgimg img{width:100%;height:100%;object-fit:cover;transition:transform 1s cubic-bezier(.2,.7,.2,1)}
+.card:hover .bgimg img{transform:scale(1.06)}
+.card .bgimg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,11,28,.1) 20%,rgba(7,11,28,.92) 85%)}
+.c-veg{grid-column:span 3;grid-row:span 2;min-height:540px}
+.c-veg .tagline{color:var(--leaf)}
+.c-off{grid-column:span 3;min-height:260px}
+.c-off .tagline{color:var(--gold)}
+.c-groc{grid-column:span 3}
+.c-groc .tagline{color:#9fb0ff}
+.c-mini{grid-column:span 2;min-height:210px;background:linear-gradient(160deg,var(--navy-2),#0c1330)}
+.c-mini .icon{font-size:34px;margin-bottom:auto;line-height:1}
+.c-mini h3{font-size:21px}
+.c-mini p{font-size:14.5px}
+
+/* then & now */
+.story{background:var(--cream);color:var(--ink);overflow:hidden}
+.story .eyebrow{color:#c0392b}
+.story h2 em{font-style:normal;color:var(--heart)}
+.story .head p{color:#4d5577}
+.duo{display:grid;grid-template-columns:1fr auto 1fr;gap:28px;align-items:center}
+.era{border-radius:28px;overflow:hidden;background:#fff;box-shadow:0 30px 60px -30px rgba(13,19,48,.45);border:1px solid rgba(13,19,48,.06)}
+.era .pic{aspect-ratio:4/3;overflow:hidden;position:relative}
+.era .pic img{width:100%;height:100%;object-fit:cover}
+.era.then .pic img{object-position:50% 22%;filter:saturate(1.05)}
+.era.now .pic img{object-position:50% 62%}
+.era .pic .chip{position:absolute;top:16px;left:16px;padding:7px 14px;border-radius:999px;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;background:rgba(13,19,48,.8);color:#fff;backdrop-filter:blur(6px)}
+.era .body{padding:26px 28px 30px}
+.era .body p{color:#4d5577;font-size:15.5px;margin-top:14px}
+.sign{border-radius:14px;padding:14px 18px;display:inline-flex;align-items:center;gap:12px;font-family:var(--display);font-weight:800;background:#0d1330}
+.sign.n2{font-size:22px;letter-spacing:.01em;box-shadow:0 0 0 1px rgba(80,110,255,.3),0 0 30px -4px rgba(80,110,255,.55)}
+.sign.n2 .h{width:24px;height:24px;color:var(--heart);filter:drop-shadow(0 0 6px rgba(255,59,78,.8))}
+.sign.n2 .n{color:var(--gold);text-shadow:0 0 12px rgba(245,196,67,.7)}
+.sign.n2 .f{color:#fff;text-shadow:0 0 8px rgba(255,255,255,.7),0 0 18px rgba(120,150,255,.8)}
+.sign.r24 .mark{width:38px;height:38px}
+.sign.r24 .w{color:#fff;font-size:22px}
+.arrow{width:74px;height:74px;border-radius:50%;background:var(--ink);display:grid;place-items:center;color:var(--gold);box-shadow:0 14px 30px -10px rgba(13,19,48,.6)}
+.arrow svg{width:30px;height:30px}
+.promise{margin-top:64px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.promise div{padding-top:22px;border-top:2px solid var(--ink)}
+.promise b{font-family:var(--display);font-size:20px;display:block;margin-bottom:6px}
+.promise p{color:#4d5577;font-size:15.5px}
+
+/* gallery */
+.gallery{display:grid;grid-template-columns:1.3fr 1fr 1fr;grid-template-rows:280px 280px;gap:18px}
+.gallery figure{border-radius:var(--radius);overflow:hidden;position:relative;border:1px solid var(--line)}
+.gallery figure:first-child{grid-row:span 2}
+.gallery figure:nth-child(4){grid-column:span 2}
+.gallery img{width:100%;height:100%;object-fit:cover;transition:transform 1.1s cubic-bezier(.2,.7,.2,1)}
+.gallery figure:hover img{transform:scale(1.06)}
+.gallery figcaption{position:absolute;left:16px;bottom:16px;padding:8px 14px;border-radius:999px;background:rgba(7,11,28,.72);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font-size:13px;font-weight:700;border:1px solid rgba(255,255,255,.12)}
+
+/* visit */
+.visit{background:linear-gradient(180deg,var(--night),#0b1230)}
+.visit-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:28px;align-items:stretch}
+.panel{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:28px;padding:clamp(28px,4vw,44px)}
+.addr{font-family:var(--display);font-size:clamp(26px,3vw,36px);font-weight:800;line-height:1.1;margin:18px 0 8px}
+.panel .sub{color:var(--muted)}
+.hours{margin:30px 0;border-top:1px solid var(--line)}
+.hours div{display:flex;justify-content:space-between;padding:13px 0;border-bottom:1px solid var(--line);font-weight:600;color:var(--muted);font-size:15.5px}
+.hours div.today{color:var(--led)}
+.hours div.today span:first-child::after{content:"Today";margin-left:10px;font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);background:var(--gold);padding:3px 8px;border-radius:999px;vertical-align:2px}
+.near{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+.near span{font-size:13px;font-weight:700;padding:8px 13px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid var(--line);color:var(--muted)}
+.map{border-radius:28px;overflow:hidden;border:1px solid var(--line);min-height:460px;position:relative;background:var(--navy-2)}
+.map iframe{position:absolute;inset:0;width:100%;height:100%;border:0;filter:invert(.92) hue-rotate(185deg) saturate(.8) contrast(.92)}
+
+/* cta band */
+.band{padding:0 0 clamp(80px,10vw,120px);background:#0b1230}
+.band .inner{border-radius:32px;padding:clamp(40px,6vw,72px);position:relative;overflow:hidden;background:radial-gradient(80% 120% at 100% 0%,rgba(245,196,67,.35),transparent 55%),radial-gradient(70% 120% at 0% 100%,rgba(255,59,78,.35),transparent 55%),linear-gradient(135deg,#1b2a6b,#111a3d);border:1px solid rgba(255,255,255,.12);display:flex;justify-content:space-between;align-items:center;gap:30px;flex-wrap:wrap}
+.band h2{font-size:clamp(30px,4.4vw,54px);max-width:680px}
+.band .bigmark{position:absolute;right:-60px;bottom:-80px;width:340px;height:340px;opacity:.12;pointer-events:none}
+
+/* footer */
+footer{background:var(--night);border-top:1px solid var(--line);padding:56px 0 40px;color:var(--muted);font-size:14.5px}
+footer .wrap{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;align-items:flex-start}
+footer .legacy{display:flex;align-items:center;gap:10px;margin-top:18px;font-size:13px}
+footer .legacy .sign{padding:8px 12px;font-size:13px}
+footer .legacy .sign .h{width:15px;height:15px}
+footer nav{display:flex;gap:26px;flex-wrap:wrap;font-weight:700}
+footer nav a:hover{color:var(--led)}
+footer .fine{width:100%;border-top:1px solid var(--line);padding-top:24px;margin-top:20px;font-size:13px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}
+
+/* ---------- responsive ---------- */
+@media (max-width:980px){
+  .nav-links{display:none}
+  .hero .wrap{grid-template-columns:minmax(0,1fr);gap:70px}
+  .stage{justify-self:center;max-width:400px}
+  .aisles{grid-template-columns:1fr 1fr}
+  .c-veg,.c-off,.c-groc{grid-column:span 2}
+  .c-veg{min-height:440px}
+  .c-mini{grid-column:span 1}
+  .duo{grid-template-columns:1fr}
+  .arrow{justify-self:center;transform:rotate(90deg)}
+  .promise{grid-template-columns:1fr}
+  .gallery{grid-template-columns:1fr 1fr;grid-template-rows:repeat(3,240px)}
+  .gallery figure:first-child{grid-row:span 1;grid-column:span 2}
+  .gallery figure:nth-child(4){grid-column:span 2}
+  .visit-grid{grid-template-columns:1fr}
+  .map{min-height:360px}
+}
+@media (max-width:600px){
+  body{font-size:16px}
+  .wrap{padding:0 16px}
+  .brand .tag{display:none}
+  .status{padding:8px 12px;font-size:12px}
+  .nav .status .txt .more{display:none}
+  .hero{padding-top:110px}
+  .sticker.s1{left:-6px}
+  .sticker.s2{right:-4px;width:96px;height:96px}
+  .sticker.s2 b{font-size:30px}
+  .aisles{grid-template-columns:1fr}
+  .c-veg,.c-off,.c-groc,.c-mini{grid-column:span 1}
+  .gallery{grid-template-columns:1fr;grid-template-rows:none;grid-auto-rows:260px}
+  .gallery figure:first-child,.gallery figure:nth-child(4){grid-column:span 1}
+  .sign.n2,.sign.r24 .w{font-size:18px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<!-- Reusable logo mark: the N2 Food Centre heart inside a 24-hour clock ring -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <radialGradient id="mk-bg" cx="50%" cy="35%" r="75%"><stop offset="0" stop-color="#1e2a66"/><stop offset="1" stop-color="#0a0f24"/></radialGradient>
+    <linearGradient id="mk-gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffe08a"/><stop offset="1" stop-color="#f0a92b"/></linearGradient>
+    <linearGradient id="mk-heart" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff5a6a"/><stop offset="1" stop-color="#e01e37"/></linearGradient>
+    <symbol id="heart" viewBox="0 0 24 24"><path fill="currentColor" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></symbol>
+    <symbol id="mark" viewBox="0 0 64 64">
+      <rect width="64" height="64" rx="16" fill="url(#mk-bg)"/>
+      <rect x=".5" y=".5" width="63" height="63" rx="15.5" fill="none" stroke="rgba(255,255,255,.1)"/>
+      <g transform="rotate(-90 32 32)" fill="none" stroke="url(#mk-gold)">
+        <circle cx="32" cy="32" r="22" stroke-width="2.4" stroke-dasharray="1.1 4.6597" stroke-dashoffset="0.55" opacity=".85"/>
+        <circle cx="32" cy="32" r="22" stroke-width="5" stroke-dasharray="1.8 32.758" stroke-dashoffset="0.9"/>
+      </g>
+      <path transform="translate(18.4 18.6) scale(1.13)" fill="url(#mk-heart)" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+    </symbol>
+  </defs>
+</svg>
+
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a href="#top" class="brand" aria-label="Retail24 home">
+      <svg class="mark"><use href="#mark"/></svg>
+      <span>
+        <span class="word">RETAIL<span class="gold">24</span></span>
+        <span class="tag">Your <i>local</i> convenience store</span>
+      </span>
+    </a>
+    <nav class="nav-links">
+      <a href="#aisles">In store</a>
+      <a href="#story">Our story</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#visit">Visit</a>
+    </nav>
+    <a href="#visit" class="status" id="status"><span class="dot"></span><span class="txt">East Finchley</span></a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <span class="eyebrow reveal">46 High Road · East Finchley N2</span>
+        <h1 class="reveal d1"><span class="neon">Your</span><span class="script">local</span><br><span class="neon">open </span><span class="gold">late.</span></h1>
+        <p class="lede reveal d2">Fresh <strong>fruit &amp; veg</strong> out front, <strong>groceries</strong> on every shelf and a properly stocked <strong>off licence</strong>. The same N2 corner shop you know, with a new name: <strong>Retail24</strong>.</p>
+        <div class="ctas reveal d3">
+          <a class="btn btn-gold" href="https://www.google.com/maps/dir/?api=1&destination=46+High+Road,+London+N2+9PJ" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.6"/></svg>
+            Get directions
+          </a>
+          <a class="btn btn-ghost" href="#aisles">See what's in store</a>
+        </div>
+        <div class="facts reveal d3">
+          <div><b>7 days</b>a week</div>
+          <div><b>Fresh</b>produce daily</div>
+          <div><b>N2</b>born &amp; bred</div>
+        </div>
+      </div>
+
+      <div class="stage reveal d2">
+        <div class="photo"><img src="assets/img/night-front.jpg" alt="The shop lit up at night, with crates of fresh fruit and veg out front under the blue awning" fetchpriority="high"></div>
+        <div class="sticker s1"><span class="em">🍊</span><span>Fresh out front<small>Fruit &amp; veg daily</small></span></div>
+        <div class="sticker s2"><b>24</b><span>RETAIL</span></div>
+        <div class="sticker s3"><svg><use href="#heart"/></svg>Lights on, door open</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TICKER (echoes the awning: Off licence · Groceries · Fruit & veg) -->
+  <div class="ticker" aria-label="Off licence, groceries, fruit and veg, cold drinks, snacks, household essentials">
+    <div class="track" aria-hidden="true">
+      <ul><li>Off licence</li><li>Groceries</li><li>Fruit &amp; veg</li><li>Ice-cold drinks</li><li>Beers, wines &amp; spirits</li><li>Snacks &amp; sweets</li><li>Household</li><li>European favourites</li><li>Ice cream</li></ul>
+      <ul><li>Off licence</li><li>Groceries</li><li>Fruit &amp; veg</li><li>Ice-cold drinks</li><li>Beers, wines &amp; spirits</li><li>Snacks &amp; sweets</li><li>Household</li><li>European favourites</li><li>Ice cream</li></ul>
+    </div>
+  </div>
+
+  <!-- AISLES -->
+  <section class="section" id="aisles">
+    <div class="wrap">
+      <div class="head">
+        <div>
+          <span class="eyebrow reveal">What's in store</span>
+          <h2 class="reveal d1">Everything for tonight. <span class="gold">And tomorrow's breakfast.</span></h2>
+        </div>
+        <p class="reveal d2">A small shop that packs a lot in: from a pint of milk to a bottle for the weekend, everything's close to hand.</p>
+      </div>
+
+      <div class="aisles">
+        <article class="card c-veg reveal">
+          <div class="bgimg"><img src="assets/img/night-front.jpg" alt="" loading="lazy" style="object-position:50% 78%"></div>
+          <span class="tagline">● Fresh daily</span>
+          <h3>Fruit &amp; veg</h3>
+          <p>Stacked high on the pavement every morning. Apples, citrus, grapes, peppers and the rest, picked for colour and priced for the high street.</p>
+        </article>
+        <article class="card c-off reveal d1">
+          <div class="bgimg"><img src="assets/img/fridge.jpg" alt="" loading="lazy" style="object-position:50% 40%"></div>
+          <span class="tagline">● Off licence</span>
+          <h3>Beers, wines &amp; spirits</h3>
+          <p>Chilled lagers, Polish favourites like Lech and Tyskie, wines and spirits for any occasion.</p>
+        </article>
+        <article class="card c-groc reveal d2">
+          <div class="bgimg"><img src="assets/img/aisle.jpg" alt="" loading="lazy" style="object-position:50% 45%"></div>
+          <span class="tagline">● Groceries</span>
+          <h3>The everyday shop</h3>
+          <p>Cupboard staples, cold drinks, Häagen-Dazs in the freezer and the household bits you ran out of.</p>
+        </article>
+        <article class="card c-mini reveal">
+          <span class="icon">🥤</span>
+          <h3>Ice-cold drinks</h3>
+          <p>Fridges full of soft drinks, water and energy drinks.</p>
+        </article>
+        <article class="card c-mini reveal d1">
+          <span class="icon">🥐</span>
+          <h3>Snacks &amp; treats</h3>
+          <p>Crisps, sweets, biltong, croissants and something for the walk home.</p>
+        </article>
+        <article class="card c-mini reveal d2">
+          <span class="icon">🧻</span>
+          <h3>Household</h3>
+          <p>Kitchen roll, tissues, cleaning and toiletries, sorted.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- STORY -->
+  <section class="section story" id="story">
+    <div class="wrap">
+      <div class="head">
+        <div>
+          <span class="eyebrow reveal">Our story</span>
+          <h2 class="reveal d1">Same corner. Same faces. <em>New name.</em></h2>
+        </div>
+        <p class="reveal d2">For years, East Finchley knew us by the glowing sign with the red heart. N2 Food Centre is now Retail24, and the heart is still at the middle of it.</p>
+      </div>
+
+      <div class="duo">
+        <article class="era then reveal">
+          <div class="pic"><img src="assets/img/night-front.jpg" alt="The N2 Food Centre sign lit up at night" loading="lazy"><span class="chip">Then</span></div>
+          <div class="body">
+            <span class="sign n2"><svg class="h"><use href="#heart"/></svg><span class="n">N2</span><span class="f">FOOD CENTRE</span></span>
+            <p>A neighbourhood favourite under the blue awning: off licence, groceries, fruit &amp; veg.</p>
+          </div>
+        </article>
+
+        <div class="arrow reveal d1" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+
+        <article class="era now reveal d2">
+          <div class="pic"><img src="assets/img/shopfront-day.jpg" alt="The Retail24 shopfront on East Finchley High Road" loading="lazy"><span class="chip">Now</span></div>
+          <div class="body">
+            <span class="sign r24"><svg class="mark"><use href="#mark"/></svg><span class="w">RETAIL<span class="gold">24</span></span></span>
+            <p>A fresh look and the same promise. Your <span class="script" style="font-size:1.35em;color:#c98a12">local</span> convenience store, a few doors from the Phoenix Cinema.</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="promise">
+        <div class="reveal"><b>Fresh first.</b><p>Produce goes out front every morning, so you see exactly what you're buying.</p></div>
+        <div class="reveal d1"><b>Open when you need us.</b><p>Early starts, late finishes, seven days a week. The lights stay on.</p></div>
+        <div class="reveal d2"><b>Proper neighbours.</b><p>Run by people who know the High Road and know your usual.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="section" id="gallery">
+    <div class="wrap">
+      <div class="head">
+        <div>
+          <span class="eyebrow reveal">Take a look inside</span>
+          <h2 class="reveal d1">Small shop. <span class="gold">Full shelves.</span></h2>
+        </div>
+      </div>
+      <div class="gallery">
+        <figure class="reveal"><img src="assets/img/night-front.jpg" alt="Shopfront at night with fruit and veg displays" loading="lazy"><figcaption>After dark on the High Road</figcaption></figure>
+        <figure class="reveal d1"><img src="assets/img/aisle.jpg" alt="Drinks fridges and household goods inside the shop" loading="lazy" style="object-position:50% 40%"><figcaption>Chilled &amp; stocked</figcaption></figure>
+        <figure class="reveal d2"><img src="assets/img/fridge.jpg" alt="Beer fridge and snacks" loading="lazy" style="object-position:50% 35%"><figcaption>Beer fridge</figcaption></figure>
+        <figure class="reveal d1"><img src="assets/img/street.jpg" alt="Retail24 on East Finchley High Road, between Animal Aid &amp; Advice and Subway" loading="lazy" style="object-position:50% 45%"><figcaption>46 High Road, East Finchley</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- VISIT -->
+  <section class="section visit" id="visit">
+    <div class="wrap">
+      <div class="head">
+        <div>
+          <span class="eyebrow reveal">Come say hello</span>
+          <h2 class="reveal d1">Pop in. <span class="gold">We're just up the road.</span></h2>
+        </div>
+      </div>
+      <div class="visit-grid">
+        <div class="panel reveal">
+          <span class="status" id="status2"><span class="dot"></span><span class="txt">Checking hours…</span></span>
+          <p class="addr">46 High Road<br>East Finchley<br>London N2 9PJ</p>
+          <p class="sub">Next door to Subway, a short walk from East Finchley tube (Northern line).</p>
+          <div class="hours" id="hours"></div>
+          <div class="near"><span>🎬 Phoenix Cinema</span><span>🚇 East Finchley station</span><span>🌳 Cherry Tree Wood</span></div>
+          <div style="margin-top:28px"><a class="btn btn-gold" href="https://www.google.com/maps/dir/?api=1&destination=46+High+Road,+London+N2+9PJ" target="_blank" rel="noopener">Get directions</a></div>
+        </div>
+        <div class="map reveal d1">
+          <iframe title="Map showing Retail24 at 46 High Road, East Finchley" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=46+High+Road,+London+N2+9PJ&z=17&output=embed"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="band">
+    <div class="wrap">
+      <div class="inner reveal">
+        <svg class="bigmark" aria-hidden="true"><use href="#mark"/></svg>
+        <h2>Out of milk? Need a bottle? <span class="gold">We've got you, N2.</span></h2>
+        <a class="btn btn-gold" href="https://www.google.com/maps/dir/?api=1&destination=46+High+Road,+London+N2+9PJ" target="_blank" rel="noopener">Find the shop</a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <a href="#top" class="brand">
+        <svg class="mark"><use href="#mark"/></svg>
+        <span><span class="word">RETAIL<span class="gold">24</span></span><span class="tag">Your <i>local</i> convenience store</span></span>
+      </a>
+      <div class="legacy">Formerly <span class="sign n2"><svg class="h"><use href="#heart"/></svg><span class="n">N2</span><span class="f">FOOD CENTRE</span></span></div>
+    </div>
+    <nav>
+      <a href="#aisles">In store</a>
+      <a href="#story">Our story</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#visit">Visit</a>
+    </nav>
+    <div class="fine">
+      <span>46 High Road, East Finchley, London N2 9PJ</span>
+      <span>Please drink responsibly. Challenge 25 applies. © <span id="yr"></span> Retail24</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* Opening hours: [open, close] in 24h "HH:MM". Confirm with the shop before launch. */
+const HOURS = {
+  Monday:["07:00","23:00"], Tuesday:["07:00","23:00"], Wednesday:["07:00","23:00"],
+  Thursday:["07:00","23:00"], Friday:["07:00","23:00"], Saturday:["07:00","23:00"], Sunday:["08:00","23:00"]
+};
+const DAYS = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+
+function londonNow(){
+  const p = Object.fromEntries(new Intl.DateTimeFormat("en-GB",{timeZone:"Europe/London",weekday:"long",hour:"2-digit",minute:"2-digit",hour12:false})
+    .formatToParts(new Date()).map(x=>[x.type,x.value]));
+  return {day:p.weekday, mins:(+p.hour%24)*60 + +p.minute};
+}
+const toMins = t => { const [h,m]=t.split(":").map(Number); return h*60+m; };
+const pretty = t => { let [h,m]=t.split(":").map(Number); const ap=h>=12?"pm":"am"; h=h%12||12; return h+(m?":"+String(m).padStart(2,"0"):"")+ap; };
+
+function renderHours(){
+  const {day, mins} = londonNow();
+  const [o,c] = HOURS[day];
+  const open = mins>=toMins(o) && mins<toMins(c);
+  const label = open ? "Open now · until "+pretty(c) : "Closed · opens "+pretty(mins<toMins(o)?o:HOURS[DAYS[(DAYS.indexOf(day)+1)%7]][0]);
+  for (const el of [document.getElementById("status"),document.getElementById("status2")]) {
+    el.classList.toggle("open",open); el.classList.toggle("closed",!open);
+    const [head,...rest] = label.split(" · ");
+    el.querySelector(".txt").innerHTML = head+'<span class="more"> · '+rest.join(" · ")+'</span>';
+  }
+  const order = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
+  document.getElementById("hours").innerHTML = order.map(d =>
+    `<div class="${d===day?"today":""}"><span>${d}</span><span>${pretty(HOURS[d][0])} – ${pretty(HOURS[d][1])}</span></div>`).join("");
+}
+renderHours(); setInterval(renderHours,60000);
+
+document.getElementById("yr").textContent = new Date().getFullYear();
+
+const nav = document.getElementById("nav");
+addEventListener("scroll",()=>nav.classList.toggle("scrolled",scrollY>30),{passive:true});
+
+const io = new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } }),{threshold:.12,rootMargin:"0px 0px -40px 0px"});
+document.querySelectorAll(".reveal").forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
